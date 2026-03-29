@@ -18,18 +18,28 @@ h1 {
     background-image: url('data/bike.gif');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
+    min-height: 80vh;
     background-position: center;
     background-origin: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;   
+    margin-top: 0; 
 }
 
 .am-bg {
     background-image: url('data/bikerack.webp');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 500px;
+    min-height: 80vh;
     background-position: center;
     background-origin: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;   
+    margin-top: 0; 
 }
 
 .title {
