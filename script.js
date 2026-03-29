@@ -1,4 +1,3 @@
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiY29ldGhhbiIsImEiOiJjbW04Mm9vNTAwem5hMnFwbXA3bm9sYzg1In0.FUDLFtuUAAp3eF1BSszV6g'; //****ADD YOUR PUBLIC ACCESS TOKEN*****
 
 
@@ -26,21 +25,22 @@ map.on('load', () => {
             'circle-color': '#1975e1'
         }
     });
-    map.addSource('city-data', {
-        'type': 'vector',
-        'url': 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr'
+
+    map.on('mouseenter', 'wf-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
     });
-    map.addLayer({
-        'id': 'city points',
-        'type': 'circle',
-        'source': 'city-data',
-        'paint': {
-            'circle-color': '#3810c8ff',
-            'circle-radius': 5,
-        },
-        'source-layer': 'GGR472 Project Map'
-    },
-        'wf-point');
+
+    map.on('mouseleave', 'wf-point', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('click', 'wf-point', (e) => {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML("<b>Water Fountain</b> " + "<br>" +
+                "<b>Address:</b> " + e.features[0].properties.address + "<br>")
+            .addTo(map);
+    })
 });
 
 map.on('load', () => {
@@ -58,21 +58,6 @@ map.on('load', () => {
             'line-color': '#000000ff'
         }
     });
-    map.addSource('city-data', {
-        'type': 'vector',
-        'url': 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr'
-    });
-    map.addLayer({
-        'id': 'city points',
-        'type': 'circle',
-        'source': 'city-data',
-        'paint': {
-            'circle-color': '#3810c8ff',
-            'circle-radius': 5,
-        },
-        'source-layer': 'GGR472 Project Map'
-    },
-        'toronto-point');
 });
 
 map.on('load', () => {
@@ -90,21 +75,21 @@ map.on('load', () => {
             'circle-color': '#BA8312'
         }
     });
-    map.addSource('city-data', {
-        'type': 'vector',
-        'url': 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr'
+
+    map.on('mouseenter', 'bpr-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
     });
-    map.addLayer({
-        'id': 'city points',
-        'type': 'circle',
-        'source': 'city-data',
-        'paint': {
-            'circle-color': '#3810c8ff',
-            'circle-radius': 5,
-        },
-        'source-layer': 'GGR472 Project Map'
-    },
-        'bpr-point');
+
+    map.on('mouseleave', 'bpr-point', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('click', 'bpr-point', (e) => {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML("<b>Bike Parking Rack</b> " + "<br>")
+            .addTo(map);
+    })
 });
 
 map.on('load', () => {
@@ -122,21 +107,22 @@ map.on('load', () => {
             'circle-color': '#9A4DFF'
         }
     });
-    map.addSource('city-data', {
-        'type': 'vector',
-        'url': 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr'
+
+    map.on('mouseenter', 'wr-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
     });
-    map.addLayer({
-        'id': 'city points',
-        'type': 'circle',
-        'source': 'city-data',
-        'paint': {
-            'circle-color': '#3810c8ff',
-            'circle-radius': 5,
-        },
-        'source-layer': 'GGR472 Project Map'
-    },
-        'wr-point');
+
+    map.on('mouseleave', 'wr-point', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('click', 'wr-point', (e) => {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML("<b>Washroom</b> " + "<br>" +
+                "<b>Address:</b> " + e.features[0].properties.address + "<br>")
+            .addTo(map);
+    })
 });
 
 map.on('load', () => {
@@ -154,19 +140,19 @@ map.on('load', () => {
             'circle-color': '#C02C82'
         }
     });
-    map.addSource('city-data', {
-        'type': 'vector',
-        'url': 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr'
+
+    map.on('mouseenter', 'park-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
     });
-    map.addLayer({
-        'id': 'city points',
-        'type': 'circle',
-        'source': 'city-data',
-        'paint': {
-            'circle-color': '#3810c8ff',
-            'circle-radius': 5,
-        },
-        'source-layer': 'GGR472 Project Map'
-    },
-        'park-point');
+
+    map.on('mouseleave', 'park-point', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('click', 'park-point', (e) => {
+        new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML("<b>Parks and Recreation</b> " + "<br>")
+            .addTo(map);
+    })
 });
