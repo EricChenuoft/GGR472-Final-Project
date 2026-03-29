@@ -14,7 +14,7 @@ h1 {
     text-shadow: 2px 2px;
 }
 
-.hero-bg {
+.main-bg {
     background-image: url('data/bike.gif');
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,6 +22,16 @@ h1 {
     background-position: center;
     background-origin: border-box;
 }
+
+.am-bg {
+    background-image: url('data/bikerack.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    background-position: center;
+    background-origin: border-box;
+}
+
 .title {
     background-color: #12ad52;
     display: inline-block;
