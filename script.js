@@ -21,7 +21,7 @@ map.on('load', () => {
         'type': 'circle',
         'source': 'wf-data',
         'paint': {
-            'circle-radius': 7,
+            'circle-radius': 5,
             'circle-color': '#1975e1'
         }
     });
@@ -54,7 +54,7 @@ map.on('load', () => {
         'type': 'line',
         'source': 'toronto-data',
         'paint': {
-            'line-length': 7,
+            'line-length': 5,
             'line-color': '#000000ff'
         }
     });
@@ -71,7 +71,7 @@ map.on('load', () => {
         'type': 'circle',
         'source': 'bpr-data',
         'paint': {
-            'circle-radius': 7,
+            'circle-radius': 5,
             'circle-color': '#BA8312'
         }
     });
@@ -103,7 +103,7 @@ map.on('load', () => {
         'type': 'circle',
         'source': 'wr-data',
         'paint': {
-            'circle-radius': 7,
+            'circle-radius': 5,
             'circle-color': '#9A4DFF'
         }
     });
@@ -136,7 +136,7 @@ map.on('load', () => {
         'type': 'circle',
         'source': 'park-data',
         'paint': {
-            'circle-radius': 7,
+            'circle-radius': 5,
             'circle-color': '#C02C82'
         }
     });
@@ -156,3 +156,4 @@ map.on('load', () => {
             .addTo(map);
     })
 });
+
