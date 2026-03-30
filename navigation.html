@@ -5,20 +5,70 @@
   <meta charset="UTF-8" />
   <title>How to Navigate the Map</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </head>
 <body class="navigation-page">
+  
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">CycleTO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Navigation bar to the homescreen-->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <!--navigation bar to  web map-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="webmap.html">Web Map</a>
+                    </li>
+                    <!--dropdown navigation bar for more information-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Instructions
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="amenities.html">
+                                    Why amenities matter?</a></li>
+                            <li><a class="dropdown-item" href="navigation.html">How to navigate the map?</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
 
-  <h1>How to Navigate the Map</h1>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <div class ="navheader">
+    <h1>How to Navigate the Map</h1>
 
-  <h2>Panning and Zooming</h2>
-  <p>Click and drag the map to move around. Scroll up to zoom in and scroll down to zoom out. You can also double-click anywhere on the map to zoom into that spot.</p>
+    </div>
+   <div class="navigationtext">
+      <div>
+        <h2>Panning and Zooming</h2>
+        <p>Click and drag the map to move around. Scroll up to zoom in and scroll down to zoom out ( or use the on-screen keys). You can also double-click anywhere on the map to zoom into that spot. Use the fullscreen icon to control map size.</p>
+      </div>
+        <img src="data/zoom.png" alt="Zoom controls" style="height: 120px;">
+      <div>
+    <h2>Toggling Map Layers</h2>
+    <p>Use the layer panel to select desired bike route length.</p>
 
-  <h2>Toggling Map Layers</h2>
-  <p>Use the layer panel to select desired bike route length.</p>
-
-  <h2>Marker</h2>
-  <p>Use the marker tool to add a marker based on user locaiton to the map</p>
-
+    <h2>Marker</h2>
+    <p>Use the marker tool to add a marker based on user locaiton to the map</p>
+  
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
