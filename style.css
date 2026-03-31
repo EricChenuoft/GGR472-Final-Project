@@ -120,7 +120,7 @@ body.navigation-page {
 
 #returnbutton {
     position: absolute;
-    margin: 60px 10px 20px;
+    margin: 125px 20px 20px;
     width: 15%;
 }
 
@@ -129,8 +129,8 @@ body.navigation-page {
     background: rgba(255, 255, 255, 0.8);
     width: 260px;
     top: 0;
-    left: 10px;
-    margin-top: 100px;
+    left: 20px;
+    margin-top: 200px;
     padding: 10px;
     border-radius: 8px;
     overflow: visible;
@@ -183,7 +183,7 @@ form {
     background: #fff;
     position: absolute;
     z-index: 1;
-    top: 10px;
+    top: 200px;
     right: 10px;
     border-radius: 3px;
     width: 120px;
@@ -219,4 +219,29 @@ form {
 
 #menu a.active:hover {
     background: #3074a4;
+}
+
+.distance-container {
+    position: absolute;
+    top: 15px;
+    left: 350px;
+    z-index: 1;
+}
+
+.distance-container>* {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 11px;
+    line-height: 18px;
+    display: block;
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.clear-button {
+    position:absolute; 
+    top:10px; 
+    left:550px; 
+    z-index:1;
 }
