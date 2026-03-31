@@ -5,81 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CycleTO</title>
-    <!-- mapbox API -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- mapbox GL JS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.js"></script>
     <!-- Turf.js -->
     <script src='https://unpkg.com/@turf/turf@7.2.0/turf.min.js'></script>
-    <!--CSS-->
-    <link rel="stylesheet" href="style.css">
+    <!-- mapbox geocoder plugin -->
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.1.0/mapbox-gl-geocoder.css"
+        type="text/css">
     <!--Navigation bar created using bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <style>
-        #map {
-            width: 100%;
-            height: 100vh;
-            /* full screen */
-        }
-    </style>
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <!-- MAP CONTAINER -->
     <div id='map' class='map'></div>
+    <div class='map-search-container'>
+        <label class="option-label" for="geocoder">Search for location</label>
+        <div id="geocoder" class="geocoder"></div>
+        <button type="button" class="btn btn-primary btn-sm" id="returnbutton">Return to full extent</button>
+    </div>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">CycleTO</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!--Navigation bar for the homescreen-->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <!--navigation bar to our web map-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="webmap.html">Web Map</a>
-                    </li>
-                    <!--dropdown navigation bar for more information-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Instructions
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="amenities.html">
-                                    More about our project</a></li>
-                            <li><a class="dropdown-item" href="navigation.html">How to navigate the map?</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+    <nav id="menu"></nav>
+    <!-- INTERACTIVITY -->
 
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    <div class='map-data-container'>
+        <label class="option-label" for="layercheck">Filter map view</label>
+
+        <!-- checkbox that shows or hides points -->
+
+        <!-- checkbox that shows or hides the legend -->
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="legendcheck">
+            <label class="form-check-label" for="legendcheck">Show legend</label>
         </div>
-    </nav>
+
+
+    </div>
+
+    <!-- LEGEND -->
+    <div id='legend' class='legend'>
+        <h4>Type</h4>
+        <!-- Contents of legend will now be added here -->
+    </div>
+
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-   <!-- LEGEND -->
-    <div id="legend" class="legend">
-        <h4>Cycle Attributes</h4>
-        <div><span></span>Bike Parking Racks</div>
-        <div><span></span>Water Fountain Stations</div>
-        <div><span></span>Parks and Recreation Facilities</div>
-        <div><span></span>Washroom Facilities</div>
-        <div><span></span>Cycling Network</div>
-    </div>
 </body>
+
 </html>
