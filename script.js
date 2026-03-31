@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY29ldGhhbiIsImEiOiJjbW04Mm9vNTAwem5hMnFwbXA3b
 
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/coethan/cmn81g1u7002401s6dxjdhgnr',
+    style: 'mapbox://styles/mapbox/satellite-v9',
     center: [-79.39, 43.65],
     zoom: 11
 });
@@ -27,6 +27,9 @@ map.on('load', () => {
         'id': 'wf-point',
         'type': 'circle',
         'source': 'wf-data',
+        'layout': { 'visibility': 'visible'
+
+        },
         'paint': {
             'circle-radius': 5,
             'circle-color': '#1975e1'
@@ -41,7 +44,8 @@ map.on('load', () => {
             'text-field': ['get', 'name'],
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
             'text-radial-offset': 0.5,
-            'text-justify': 'auto'
+            'text-justify': 'auto',
+            'visibility': 'visible'
         },
         'paint': {
             'text-color': 'blue' // Makes the text colour red
@@ -73,9 +77,12 @@ map.on('load', () => {
         'id': 'toronto-line',
         'type': 'line',
         'source': 'toronto-data',
+        'layout': { 'visibility': 'visible'
+
+        },
         'paint': {
-            'line-length': 2,
-            'line-color': '#000000ff'
+            'line-width': 2,
+            'line-color': 'rgb(25, 145, 29)'
         },
     });
 
@@ -87,7 +94,9 @@ map.on('load', () => {
             'text-field': ['get', 'name'],
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
             'text-radial-offset': 0.5,
-            'text-justify': 'auto'
+            'text-justify': 'auto',
+            'visibility': 'visible'
+
         },
         'paint': {
             'text-color': 'black' // Makes the text colour red
@@ -103,6 +112,9 @@ map.on('load', () => {
         'id': 'bpr-point',
         'type': 'circle',
         'source': 'bpr-data',
+        'layout': { 'visibility': 'visible'
+
+        },
         'paint': {
             'circle-radius': 5,
             'circle-color': '#BA8312'
@@ -117,7 +129,8 @@ map.on('load', () => {
             'text-field': ['get', 'name'],
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
             'text-radial-offset': 0.5,
-            'text-justify': 'auto'
+            'text-justify': 'auto',
+            'visibility': 'visible'
         },
         'paint': {
             'text-color': 'brown' // Makes the text colour red
@@ -149,6 +162,9 @@ map.on('load', () => {
         'id': 'wr-point',
         'type': 'circle',
         'source': 'wr-data',
+        'layout': { 'visibility': 'visible'
+
+        },
         'paint': {
             'circle-radius': 5,
             'circle-color': '#9A4DFF'
@@ -163,7 +179,8 @@ map.on('load', () => {
             'text-field': ['get', 'name'],
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
             'text-radial-offset': 0.5,
-            'text-justify': 'auto'
+            'text-justify': 'auto',
+            'visibility': 'visible'
         },
         'paint': {
             'text-color': 'purple' // Makes the text colour red
@@ -195,6 +212,9 @@ map.on('load', () => {
         'id': 'park-point',
         'type': 'circle',
         'source': 'park-data',
+        'layout': { 'visibility': 'visible'
+
+        },
         'paint': {
             'circle-radius': 5,
             'circle-color': '#C02C82'
@@ -209,7 +229,8 @@ map.on('load', () => {
             'text-field': ['get', 'name'],
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
             'text-radial-offset': 0.5,
-            'text-justify': 'auto'
+            'text-justify': 'auto',
+            'visibility': 'visible'
         },
         'paint': {
             'text-color': 'pink' // Makes the text colour red
@@ -239,6 +260,32 @@ map.on('load', () => {
         });
     });
 
+    // Chooses what to put on the legend, and what colour represents it
+    const legenditems = [
+        { label: 'Parks and Recreational Facilities', colour: '#C02C82' },
+        { label: 'water fountains', colour: '#1975e1' },
+        { label: 'Bike Racks', colour: '#BA8312' },
+        { label: 'Washrooms', colour: '#9A4DFF' },
+        { label: 'Bike Routes', colour: 'rgb(25, 145, 29)' },
+    ];
+
+
+    // For each array item create a row to put the label and colour in
+    legenditems.forEach(({ label, colour }) => {
+        const row = document.createElement('div'); // each item gets a 'row' as a div - this isn't in the legend yet, we do this later
+        const colcircle = document.createElement('span'); // create span for colour circle
+
+        colcircle.className = 'legend-colcircle'; // the colcircle will take on the shape and style properties defined in css
+        colcircle.style.setProperty('--legendcolour', colour); // a custom property is used to take the colour from the array and apply it to the css class
+
+        const text = document.createElement('span'); // create span for label text
+        text.textContent = label; // set text variable to tlegend label value in array
+
+        row.append(colcircle, text); // add circle and text to legend row
+        legend.appendChild(row); // add row to legend container
+    });
+
+    // Chooses whether to display the legend or not but using a check box 
     let legendcheck = document.getElementById('legendcheck');
 
     legendcheck.addEventListener('click', () => {
@@ -251,45 +298,61 @@ map.on('load', () => {
             legendcheck.checked = false;
         }
     });
+});
 
-    let ptvalue;
+map.on('idle', () => {
+        // If these two layers were not added to the map, abort
+        if (!map.getLayer('wf-point') || !map.getLayer('wr-point') || !map.getLayer('bpr-point')|| !map.getLayer('park-point')|| !map.getLayer('toronto-line')) {
+            return;
+        }
 
-    document.getElementById("ptfieldset").addEventListener('change', (e) => {
-        ptvalue = document.getElementById('type').value; // get selected dropdown value
+        // Enumerate ids of the layers.
+        const toggleableLayerIds = ['wf-point', 'wr-point', 'bpr-point', 'park-point','toronto-line'];
 
-        if (ptvalue == 'All') {
-            map.setFilter('wf-point', ['has', 'type']);
-            map.setFilter('wf-labels', ['has', 'type']);
+        // Set up the corresponding toggle button for each layer.
+        for (const id of toggleableLayerIds) {
+            // Skip layers that already have a button set up.
+            if (document.getElementById(id)) {
+                continue;
+            }
 
-            map.setFilter('bpr-point', ['has', 'type']);
-            map.setFilter('bpr-labels', ['has', 'type']);
+            // Create a link.
+            const link = document.createElement('a');
+            link.id = id;
+            link.href = '#';
+            link.textContent = id;
+            link.className = 'active';
 
-            map.setFilter('park-point', ['has', 'type']);
-            map.setFilter('park-labels', ['has', 'type']);
+            // Show or hide layer when the toggle is clicked.
+            link.onclick = function (e) {
+                const clickedLayer = this.textContent;
+                e.preventDefault();
+                e.stopPropagation();
 
-            map.setFilter('wr-point', ['has', 'type']);
-            map.setFilter('wr-labels', ['has', 'type']);
+                const visibility = map.getLayoutProperty(
+                    clickedLayer,
+                    'visibility'
+                );
 
-            map.setFilter('toronto-line', ['has', 'type']);
-            map.setFilter('toronto-labels', ['has', 'type']);
-        } else {
-            map.setFilter('wf-point', ['==', ['get', 'type'], ptvalue]);
-            map.setFilter('wf-labels', ['==', ['get', 'type'], ptvalue]);
+                // Toggle layer visibility by changing the layout object's visibility property.
+                if (visibility === 'visible') {
+                    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                    this.className = '';
+                } else {
+                    this.className = 'active';
+                    map.setLayoutProperty(
+                        clickedLayer,
+                        'visibility',
+                        'visible'
+                    );
+                }
+            };
 
-            map.setFilter('bpr-point', ['==', ['get', 'type'], ptvalue]);
-            map.setFilter('bpr-labels', ['==', ['get', 'type'], ptvalue]);
-
-            map.setFilter('park-point', ['==', ['get', 'type'], ptvalue]);
-            map.setFilter('park-labels', ['==', ['get', 'type'], ptvalue]);
-
-            map.setFilter('wr-point', ['==', ['get', 'type'], ptvalue]);
-            map.setFilter('wr-labels', ['==', ['get', 'type'], ptvalue]);
-
-            map.setFilter('toronto-line', ['==', ['get', 'type'], ptvalue]);
-            map.setFilter('toronto-labels', ['==', ['get', 'type'], ptvalue]);
+            const layers = document.getElementById('menu');
+            layers.appendChild(link);
         }
     });
-});
+
 
 // map.on('load', () => {
 
