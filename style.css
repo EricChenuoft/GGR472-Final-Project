@@ -117,14 +117,10 @@ body.navigation-page {
     width: 100%;
 }
 
-.geocoder {
-    position: relative;
-    margin: 10px 0 10px;
-}
 
 #returnbutton {
     position: absolute;
-    margin: 10px 10px 20px;
+    margin: 60px 10px 20px;
     width: 15%;
 }
 
@@ -134,7 +130,7 @@ body.navigation-page {
     width: 260px;
     top: 0;
     left: 10px;
-    margin-top: 60px;
+    margin-top: 100px;
     padding: 10px;
     border-radius: 8px;
     overflow: visible;
