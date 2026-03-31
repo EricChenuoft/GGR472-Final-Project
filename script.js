@@ -7,18 +7,110 @@ const map = new mapboxgl.Map({
     zoom: 11
 });
 
-map.addControl(new mapboxgl.NavigationControl());
 map.addControl(new mapboxgl.FullscreenControl());
 
-const geocoder = new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl: mapboxgl,
-});
+// pixels the map pans when the up or down arrow is clicked
+const deltaDistance = 100;
 
-document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+// degrees the map rotates when the left or right arrow is clicked
+const deltaDegrees = 25;
+
+function easing(t) {
+    return t * (2 - t);
+}
+
+const distanceContainer = document.getElementById('distance');
+
+// GeoJSON object to hold our measurement features
+const geojson = {
+    'type': 'FeatureCollection',
+    'features': []
+};
+
+// Used to draw a line between points
+const linestring = {
+    'type': 'Feature',
+    'geometry': {
+        'type': 'LineString',
+        'coordinates': []
+    }
+};
 
 map.on('load', () => {
+    //A button function that clears the distance line found on mapbox website
+    document.getElementById('clear-btn').addEventListener('click', () => {
+    // Clear all features
+    geojson.features = [];
+    // Clear the linestring coordinates
+    linestring.geometry.coordinates = [];
+    // Clear the distance display
+    distanceContainer.innerHTML = '';
+    // Update the map source
+    map.getSource('geojson').setData(geojson);
+});
+    map.getCanvas().focus();
+    map.getCanvas().parentNode.classList.remove('mapboxgl-interactive');
 
+    map.getCanvas().addEventListener(
+        'keydown',
+        (e) => {
+            e.preventDefault();
+            if (e.which === 38) {
+                // up
+                map.panBy([0, -deltaDistance], {
+                    easing: easing
+                });
+            } else if (e.which === 40) {
+                // down
+                map.panBy([0, deltaDistance], {
+                    easing: easing
+                });
+            } else if (e.which === 37) {
+                // left
+                map.easeTo({
+                    bearing: map.getBearing() - deltaDegrees,
+                    easing: easing
+                });
+            } else if (e.which === 39) {
+                // right
+                map.easeTo({
+                    bearing: map.getBearing() + deltaDegrees,
+                    easing: easing
+                });
+            }
+        },
+        true
+    );
+    map.addSource('geojson', {
+        'type': 'geojson',
+        'data': geojson
+    });
+
+    // Add styles to the map
+    map.addLayer({
+        id: 'measure-points',
+        type: 'circle',
+        source: 'geojson',
+        paint: {
+            'circle-radius': 5,
+            'circle-color': '#000'
+        },
+        filter: ['in', '$type', 'Point']
+    });
+    map.addLayer({
+        id: 'measure-lines',
+        type: 'line',
+        source: 'geojson',
+        layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+        },
+        paint: {
+            'line-color': '#000',
+            'line-width': 2.5
+        },
+        filter: ['in', '$type', 'LineString']
+    });
     map.addSource('wf-data', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Parks%20Drinking%20Fountains%20-%204326.geojson'
@@ -362,19 +454,80 @@ map.on('idle', () => {
         const layers = document.getElementById('menu');
         layers.appendChild(link);
     }
+    map.on('click', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ['measure-points']
+        });
+
+        // Remove the linestring from the group
+        // so we can redraw it based on the points collection.
+        if (geojson.features.length > 1) geojson.features.pop();
+
+        // Clear the distance container to populate it with a new value.
+        distanceContainer.innerHTML = '';
+
+        // If a feature was clicked, remove it from the map.
+        if (features.length) {
+            const id = features[0].properties.id;
+            geojson.features = geojson.features.filter(
+                (point) => point.properties.id !== id
+            );
+        } else {
+            const point = {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [e.lngLat.lng, e.lngLat.lat]
+                },
+                'properties': {
+                    'id': String(new Date().getTime())
+                }
+            };
+
+            geojson.features.push(point);
+        }
+
+        if (geojson.features.length > 1) {
+            linestring.geometry.coordinates = geojson.features.map(
+                (point) => point.geometry.coordinates
+            );
+
+            geojson.features.push(linestring);
+
+            // Populate the distanceContainer with total distance
+            const value = document.createElement('pre');
+            const distance = turf.length(linestring);
+            value.textContent = `Total distance: ${distance.toLocaleString()}km`;
+            distanceContainer.appendChild(value);
+        }
+
+        map.getSource('geojson').setData(geojson);
+    });
+});
+
+map.on('mousemove', (e) => {
+    const features = map.queryRenderedFeatures(e.point, {
+        layers: ['measure-points']
+    });
+    // Change the cursor to a pointer when hovering over a point on the map.
+    // Otherwise cursor is a crosshair.
+    map.getCanvas().style.cursor = features.length
+        ? 'pointer'
+        : 'crosshair';
+
 });
 
 map.addControl(
-        new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            // When active the map will receive updates to the device's location as it changes.
-            trackUserLocation: true,
-            // Draw an arrow next to the location dot to indicate which direction the device is heading.
-            showUserHeading: true
-        })
-    );
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+    })
+);
 
 
 
