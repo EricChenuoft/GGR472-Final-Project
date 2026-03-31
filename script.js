@@ -27,7 +27,8 @@ map.on('load', () => {
         'id': 'wf-point',
         'type': 'circle',
         'source': 'wf-data',
-        'layout': { 'visibility': 'visible'
+        'layout': {
+            'visibility': 'visible'
 
         },
         'paint': {
@@ -77,7 +78,8 @@ map.on('load', () => {
         'id': 'toronto-line',
         'type': 'line',
         'source': 'toronto-data',
-        'layout': { 'visibility': 'visible'
+        'layout': {
+            'visibility': 'visible'
 
         },
         'paint': {
@@ -112,7 +114,8 @@ map.on('load', () => {
         'id': 'bpr-point',
         'type': 'circle',
         'source': 'bpr-data',
-        'layout': { 'visibility': 'visible'
+        'layout': {
+            'visibility': 'visible'
 
         },
         'paint': {
@@ -162,7 +165,8 @@ map.on('load', () => {
         'id': 'wr-point',
         'type': 'circle',
         'source': 'wr-data',
-        'layout': { 'visibility': 'visible'
+        'layout': {
+            'visibility': 'visible'
 
         },
         'paint': {
@@ -212,7 +216,8 @@ map.on('load', () => {
         'id': 'park-point',
         'type': 'circle',
         'source': 'park-data',
-        'layout': { 'visibility': 'visible'
+        'layout': {
+            'visibility': 'visible'
 
         },
         'paint': {
@@ -298,60 +303,80 @@ map.on('load', () => {
             legendcheck.checked = false;
         }
     });
+    map.addControl(
+        new MapboxDirections({
+            accessToken: mapboxgl.accessToken
+        }),
+        'top-left'
+    );
 });
 
 map.on('idle', () => {
-        // If these two layers were not added to the map, abort
-        if (!map.getLayer('wf-point') || !map.getLayer('wr-point') || !map.getLayer('bpr-point')|| !map.getLayer('park-point')|| !map.getLayer('toronto-line')) {
-            return;
+    // If these two layers were not added to the map, abort
+    if (!map.getLayer('wf-point') || !map.getLayer('wr-point') || !map.getLayer('bpr-point') || !map.getLayer('park-point') || !map.getLayer('toronto-line')) {
+        return;
+    }
+
+    // Enumerate ids of the layers.
+    const toggleableLayerIds = ['wf-point', 'wr-point', 'bpr-point', 'park-point', 'toronto-line'];
+
+    // Set up the corresponding toggle button for each layer.
+    for (const id of toggleableLayerIds) {
+        // Skip layers that already have a button set up.
+        if (document.getElementById(id)) {
+            continue;
         }
 
-        // Enumerate ids of the layers.
-        const toggleableLayerIds = ['wf-point', 'wr-point', 'bpr-point', 'park-point','toronto-line'];
+        // Create a link.
+        const link = document.createElement('a');
+        link.id = id;
+        link.href = '#';
+        link.textContent = id;
+        link.className = 'active';
 
-        // Set up the corresponding toggle button for each layer.
-        for (const id of toggleableLayerIds) {
-            // Skip layers that already have a button set up.
-            if (document.getElementById(id)) {
-                continue;
-            }
+        // Show or hide layer when the toggle is clicked.
+        link.onclick = function (e) {
+            const clickedLayer = this.textContent;
+            e.preventDefault();
+            e.stopPropagation();
 
-            // Create a link.
-            const link = document.createElement('a');
-            link.id = id;
-            link.href = '#';
-            link.textContent = id;
-            link.className = 'active';
+            const visibility = map.getLayoutProperty(
+                clickedLayer,
+                'visibility'
+            );
 
-            // Show or hide layer when the toggle is clicked.
-            link.onclick = function (e) {
-                const clickedLayer = this.textContent;
-                e.preventDefault();
-                e.stopPropagation();
-
-                const visibility = map.getLayoutProperty(
+            // Toggle layer visibility by changing the layout object's visibility property.
+            if (visibility === 'visible') {
+                map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                this.className = '';
+            } else {
+                this.className = 'active';
+                map.setLayoutProperty(
                     clickedLayer,
-                    'visibility'
+                    'visibility',
+                    'visible'
                 );
+            }
+        };
 
-                // Toggle layer visibility by changing the layout object's visibility property.
-                if (visibility === 'visible') {
-                    map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-                    this.className = '';
-                } else {
-                    this.className = 'active';
-                    map.setLayoutProperty(
-                        clickedLayer,
-                        'visibility',
-                        'visible'
-                    );
-                }
-            };
+        const layers = document.getElementById('menu');
+        layers.appendChild(link);
+    }
+});
 
-            const layers = document.getElementById('menu');
-            layers.appendChild(link);
-        }
-    });
+map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            // When active the map will receive updates to the device's location as it changes.
+            trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            showUserHeading: true
+        })
+    );
+
+
 
 
 // map.on('load', () => {
