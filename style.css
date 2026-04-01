@@ -108,9 +108,8 @@ body.navigation-page {
 
 /* Style each paragraph */
 .navigation-page p {
-    font-weight: bold;
     font-size: 30px;
-    line-height: 1.6;
+    line-height: 1.3;
     color: #555555;
 }
 /*Dots explaining the layer controls*/
