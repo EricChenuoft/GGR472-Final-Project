@@ -85,8 +85,9 @@ body.navigation-page {
 
 /* Style the main title */
 .navigation-page h1 {
-    max-width: 100%;
+    max-width: 1000px;
     width: 100%;
+    margin: 0 auto;
     font-size: 60px;
     font-family: "Segoe UI", sans-serif;
     font-weight: bold;
@@ -101,14 +102,16 @@ body.navigation-page {
 /* Style each section heading */
 .navigation-page h2 {
     font-weight: bold;
+    font-family: "Segoe UI", sans-serif;
     font-size: 40px;
     margin-top: 30px;
-    color: #12a73f;
+    color: #010703;
 }
 
 /* Style each paragraph */
 .navigation-page p {
-    font-size: 30px;
+    font-size: 20px;
+    font-family: "Segoe UI", sans-serif;
     line-height: 1.3;
     color: #555555;
 }
