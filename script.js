@@ -1,5 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiY29ldGhhbiIsImEiOiJjbW04Mm9vNTAwem5hMnFwbXA3bm9sYzg1In0.FUDLFtuUAAp3eF1BSszV6g';
 
+// Create a new Mapbox map instances
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/satellite-v9',
@@ -111,24 +112,29 @@ map.on('load', () => {
         },
         filter: ['in', '$type', 'LineString']
     });
+
+    // Add a new data source for water fountain locations
     map.addSource('wf-data', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Parks%20Drinking%20Fountains%20-%204326.geojson'
     });
+
+    // Add a layer to display water fountains as circle points
     map.addLayer({
         'id': 'wf-point',
         'type': 'circle',
         'source': 'wf-data',
         'layout': {
-            'visibility': 'visible'
+            'visibility': 'visible' // Layer is visible by default
 
         },
         'paint': {
-            'circle-radius': 5,
+            'circle-radius': 5, // Size of each fountain point
             'circle-color': '#1975e1'
         }
     });
 
+    // Add a layer to display labels (names) for water fountains
     map.addLayer({
         'id': 'wf-labels',
         'type': 'symbol',
@@ -141,18 +147,21 @@ map.on('load', () => {
             'visibility': 'visible'
         },
         'paint': {
-            'text-color': 'blue' // Makes the text colour red
+            'text-color': 'blue' 
         },
     });
 
+    // Change cursor to pointer when hovering over water fountain points
     map.on('mouseenter', 'wf-point', () => {
         map.getCanvas().style.cursor = 'pointer';
     });
 
+    // Reset cursor when mouse leaves water fountain points
     map.on('mouseleave', 'wf-point', () => {
         map.getCanvas().style.cursor = '';
     });
 
+    // When a water fountain point is clicked, display a popup with details
     map.on('click', 'wf-point', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
@@ -161,11 +170,13 @@ map.on('load', () => {
             .addTo(map);
     });
 
+    // Add a new data source for Toronto cycling network (lines)
     map.addSource('toronto-data', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/main/Data%20from%20geojson.io/cycling-network%20-%204326-2.geojson'
     });
 
+    // Add a layer to display cycling routes as lines
     map.addLayer({
         'id': 'toronto-line',
         'type': 'line',
@@ -175,11 +186,12 @@ map.on('load', () => {
 
         },
         'paint': {
-            'line-width': 2,
+            'line-width': 2, // Width of each cycle route
             'line-color': 'rgb(25, 145, 29)'
         },
     });
 
+    // Add a layer to display labels (names) for cycling routes
     map.addLayer({
         'id': 'toronto-labels',
         'type': 'symbol',
@@ -193,29 +205,33 @@ map.on('load', () => {
 
         },
         'paint': {
-            'text-color': 'black' // Makes the text colour red
+            'text-color': 'black' 
         },
     });
 
+    // Add a new data source for bicycle parking rack locations
     map.addSource('bpr-data', {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Bicycle%20Parking%20Racks%20Data%20-%204326.geojson'
     });
 
+    // Add a layer to display bike rack locations as circle points
     map.addLayer({
         'id': 'bpr-point',
         'type': 'circle',
         'source': 'bpr-data',
         'layout': {
-            'visibility': 'visible'
+            'visibility': 'visible' // Layer is visible by default
+
 
         },
         'paint': {
-            'circle-radius': 5,
+            'circle-radius': 5, // Size of each bike rack point
             'circle-color': '#BA8312'
         }
     });
 
+    // Add a layer to display labels (names) for bike racks
     map.addLayer({
         'id': 'bpr-labels',
         'type': 'symbol',
@@ -228,19 +244,22 @@ map.on('load', () => {
             'visibility': 'visible'
         },
         'paint': {
-            'text-color': 'brown' // Makes the text colour red
+            'text-color': 'brown' 
         },
     });
 
 
+    // Change cursor to pointer when hovering over bike rack points
     map.on('mouseenter', 'bpr-point', () => {
         map.getCanvas().style.cursor = 'pointer';
     });
 
+    // Reset cursor when mouse leaves bike rack points
     map.on('mouseleave', 'bpr-point', () => {
         map.getCanvas().style.cursor = '';
     });
 
+    // When a bike rack point is clicked, display a popup
     map.on('click', 'bpr-point', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
@@ -248,25 +267,28 @@ map.on('load', () => {
             .addTo(map);
     });
 
+    // Add a new data source for washroom facilities
     map.addSource('wr-data', {
-        type: 'geojson',
+        type: 'geojson', 
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Washroom%20Facilities%20-%204326-3.geojson'
-    });
+    }); 
 
+    // Add a layer to display washroom locations as circle points
     map.addLayer({
         'id': 'wr-point',
         'type': 'circle',
         'source': 'wr-data',
         'layout': {
-            'visibility': 'visible'
+            'visibility': 'visible' // Layer is visible by default
 
         },
         'paint': {
-            'circle-radius': 5,
+            'circle-radius': 5, // Size of each washroom point
             'circle-color': '#9A4DFF'
         }
     });
 
+    // Add a layer to display labels (names) for washrooms
     map.addLayer({
         'id': 'wr-labels',
         'type': 'symbol',
@@ -279,18 +301,21 @@ map.on('load', () => {
             'visibility': 'visible'
         },
         'paint': {
-            'text-color': 'purple' // Makes the text colour red
+            'text-color': 'purple' 
         },
     });
 
+    // Change cursor to pointer when hovering over washroom points
     map.on('mouseenter', 'wr-point', () => {
         map.getCanvas().style.cursor = 'pointer';
     });
 
+    // Reset cursor when mouse leaves washroom points
     map.on('mouseleave', 'wr-point', () => {
         map.getCanvas().style.cursor = '';
     });
 
+    // When a washroom point is clicked, show a popup with details
     map.on('click', 'wr-point', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
@@ -299,49 +324,53 @@ map.on('load', () => {
             .addTo(map);
     });
 
+    // Add a new data source to the map for park and recreation locations
     map.addSource('park-data', {
-        type: 'geojson',
+        type: 'geojson', 
         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Parks%20and%20Recreation%20Facilities%20-%204326.geojson'
-    });
-
+    }); 
+    
+    // Add a layer to display park locations as circle points
     map.addLayer({
-        'id': 'park-point',
-        'type': 'circle',
-        'source': 'park-data',
+        'id': 'park-point', 
+        'type': 'circle',   
+        'source': 'park-data', 
         'layout': {
-            'visibility': 'visible'
+            'visibility': 'visible' // Layer is visible by default
 
         },
         'paint': {
-            'circle-radius': 5,
-            'circle-color': '#C02C82'
+            'circle-radius': 5, // Size of each washroom point
+            'circle-color': '#C02C82' 
         }
     });
 
+    // Add a layer to display labels (names) for each park
     map.addLayer({
-        'id': 'park-labels',
-        'type': 'symbol',
-        'source': 'park-data',
+        'id': 'park-labels', 
+        'type': 'symbol', 
+        'source': 'park-data', 
         'layout': {
-            'text-field': ['get', 'name'],
+            'text-field': ['get', 'name'], 
             'text-variable-anchor': ['bottom'], // Places the name of the location underneath the point
-            'text-radial-offset': 0.5,
-            'text-justify': 'auto',
-            'visibility': 'visible'
+            'text-radial-offset': 0.5, 
+            'text-justify': 'auto', 
+            'visibility': 'visible' 
         },
         'paint': {
-            'text-color': 'pink' // Makes the text colour red
+            'text-color': 'pink' 
         },
     });
-
+    // Change cursor to pointer when mouse enters a park point (hover effect)
     map.on('mouseenter', 'park-point', () => {
         map.getCanvas().style.cursor = 'pointer';
     });
-
+    // Reset cursor back to default when mouse leaves the park point
     map.on('mouseleave', 'park-point', () => {
         map.getCanvas().style.cursor = '';
     });
 
+    // When a park point is clicked, create and display a popup
     map.on('click', 'park-point', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
@@ -349,6 +378,7 @@ map.on('load', () => {
             .addTo(map);
     });
 
+    // Add click event to "return" button to reset map view
     document.getElementById('returnbutton').addEventListener('click', () => {
         map.flyTo({
             center: [-79.39, 43.65],
@@ -528,155 +558,5 @@ map.addControl(
         showUserHeading: true
     })
 );
-
-
-
-
-// map.on('load', () => {
-
-//     map.addSource('wf-data', {
-//         type: 'geojson',
-//         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Parks%20Drinking%20Fountains%20-%204326.geojson'
-//     });
-//     map.addLayer({
-//         'id': 'wf-point',
-//         'type': 'circle',
-//         'source': 'wf-data',
-//         'paint': {
-//             'circle-radius': 5,
-//             'circle-color': '#1975e1'
-//         }
-//     });
-
-//     map.on('mouseenter', 'wf-point', () => {
-//         map.getCanvas().style.cursor = 'pointer';
-//     });
-
-//     map.on('mouseleave', 'wf-point', () => {
-//         map.getCanvas().style.cursor = '';
-//     });
-
-//     map.on('click', 'wf-point', (e) => {
-//         new mapboxgl.Popup()
-//             .setLngLat(e.lngLat)
-//             .setHTML("<b>Water Fountain</b> " + "<br>" +
-//                 "<b>Address:</b> " + e.features[0].properties.address + "<br>")
-//             .addTo(map);
-//     });
-// });
-
-// map.on('load', () => {
-
-//     map.addSource('toronto-data', {
-//         type: 'geojson',
-//         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/main/Data%20from%20geojson.io/cycling-network%20-%204326-2.geojson'
-//     });
-//     map.addLayer({
-//         'id': 'toronto-line',
-//         'type': 'line',
-//         'source': 'toronto-data',
-//         'paint': {
-//             'line-length': 5,
-//             'line-color': '#000000ff'
-//         }
-//     });
-// });
-
-// map.on('load', () => {
-
-//     map.addSource('bpr-data', {
-//         type: 'geojson',
-//         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Bicycle%20Parking%20Racks%20Data%20-%204326.geojson'
-//     });
-//     map.addLayer({
-//         'id': 'bpr-point',
-//         'type': 'circle',
-//         'source': 'bpr-data',
-//         'paint': {
-//             'circle-radius': 5,
-//             'circle-color': '#BA8312'
-//         }
-//     });
-
-//     map.on('mouseenter', 'bpr-point', () => {
-//         map.getCanvas().style.cursor = 'pointer';
-//     });
-
-//     map.on('mouseleave', 'bpr-point', () => {
-//         map.getCanvas().style.cursor = '';
-//     });
-
-//     map.on('click', 'bpr-point', (e) => {
-//         new mapboxgl.Popup()
-//             .setLngLat(e.lngLat)
-//             .setHTML("<b>Bike Parking Rack</b> " + "<br>")
-//             .addTo(map);
-//     })
-// });
-
-// map.on('load', () => {
-
-//     map.addSource('wr-data', {
-//         type: 'geojson',
-//         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Washroom%20Facilities%20-%204326-3.geojson'
-//     });
-//     map.addLayer({
-//         'id': 'wr-point',
-//         'type': 'circle',
-//         'source': 'wr-data',
-//         'paint': {
-//             'circle-radius': 5,
-//             'circle-color': '#9A4DFF'
-//         }
-//     });
-
-//     map.on('mouseenter', 'wr-point', () => {
-//         map.getCanvas().style.cursor = 'pointer';
-//     });
-
-//     map.on('mouseleave', 'wr-point', () => {
-//         map.getCanvas().style.cursor = '';
-//     });
-
-//     map.on('click', 'wr-point', (e) => {
-//         new mapboxgl.Popup()
-//             .setLngLat(e.lngLat)
-//             .setHTML("<b>Washroom</b> " + "<br>" +
-//                 "<b>Address:</b> " + e.features[0].properties.address + "<br>")
-//             .addTo(map);
-//     })
-// });
-
-// map.on('load', () => {
-
-//     map.addSource('park-data', {
-//         type: 'geojson',
-//         data: 'https://raw.githubusercontent.com/EricChenuoft/GGR472-Final-Project/refs/heads/main/Data%20from%20geojson.io/Parks%20and%20Recreation%20Facilities%20-%204326.geojson'
-//     });
-//     map.addLayer({
-//         'id': 'park-point',
-//         'type': 'circle',
-//         'source': 'park-data',
-//         'paint': {
-//             'circle-radius': 5,
-//             'circle-color': '#C02C82'
-//         }
-//     });
-
-//     map.on('mouseenter', 'park-point', () => {
-//         map.getCanvas().style.cursor = 'pointer';
-//     });
-
-//     map.on('mouseleave', 'park-point', () => {
-//         map.getCanvas().style.cursor = '';
-//     });
-
-//     map.on('click', 'park-point', (e) => {
-//         new mapboxgl.Popup()
-//             .setLngLat(e.lngLat)
-//             .setHTML("<b>Parks and Recreation</b> " + "<br>")
-//             .addTo(map);
-//     })
-// });
 
 
