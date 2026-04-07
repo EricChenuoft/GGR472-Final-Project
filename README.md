@@ -1,7 +1,7 @@
 # GGR472 Final Project
 This repository contains codes and data used to create our website, 
 
-# Repository content
+## Repository content
 - Data from geojson.io/Bicycle Parkng Racks Data - 4326.geojson: Data file containing point location of bicycle parking racks in the city of Toronto
 - Data from geojson.io/Cycling-network - 4326-2.geojson: Data file containing line locations of cycle network in the city of Toronto
 - Data from geojson.io/Parks and Recreation Facilities - 4326.geojson: Data file containing point locations of parks and recreation facilities in the city of Toronto
