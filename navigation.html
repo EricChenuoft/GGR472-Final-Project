@@ -4,15 +4,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>How to Navigate the Map</title>
+   <!-- Local stylesheet for custom styles -->
   <link rel="stylesheet" href="style.css" />
+  <!-- Bootstrap 5 CSS for responsive layout and components -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  <!-- Bootstrap 5 JS bundle (includes Popper.js for dropdowns) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </head>
 <body class="navigation-page">
-  
+  <!-- ===== navigation bar ===== -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">CycleTO</a>
@@ -51,22 +54,27 @@
             </div>
         </div>
     </nav>
+  <!-- Page heading -->
   <div class ="navheader">
     <h1>How to Navigate the Map</h1>
 
     </div>
-
+   <!-- ===== main instructions content ===== -->
    <div class="navigationtext">
+        <!-- Section: Panning and Zooming -->
         <div>
             <h2>Panning and Zooming</h2>
             <p>Click and drag the map to move around. Scroll up to zoom in and scroll down to zoom out. You can also double-click anywhere on the map to zoom into that spot.</p>
         </div>
+            <!-- Return to Full Extent button icon and description -->
             <img src="data/rtfull.png"  style="height: 40px;">
             <p> Click on the "Return to Full Extent" key to return to the default zoom level and recenter the view on Downtown Toronto.</p>
+        <!-- Section: Full Screen -->
         <div>
             <h2>Full Screen</h2>
             <p>Click on the full-screen key to view the screen in full-screen mode.</p>
         <img src="data/fullscreen.png"  style="height: 40px;">
+        <!-- Section: Legend Toggle -->
         <h2> Legend Toggle</h2>
         <p>Click on the show legend key to show or hide the legend.</p>
         <div>
@@ -74,8 +82,10 @@
             <span style="color: red; font-size: 80px;line-height: 20px;vertical-align: middle"> &#10145 </span> 
             <img src="data/legend.png"  style="height: 200px;vertical-align: middle; border-style: solid; border-width: 2px; border-color: black;">
         </div >
+        <!-- Section: Toggling Map Layers -->
         <h2>Toggling Map Layers</h2>
         <p>Use the layer panel on the right side of the screen to toggle layers on and off. </p>
+        <!-- Layer toggle panel screenshot with colour-coded legend key -->
         <div>
             <img src="data/layertoggles.png" style="height: 200px;vertical-align: middle">
             <span style="display: inline-block; vertical-align: top; margin-top: 20px;">
@@ -87,6 +97,7 @@
             </span>
         </div>  
         <p>Click on any Water Fountain or Washroom point on the map to see it's address.</p>
+        <!-- Section: Location Marker -->
         <h2>Location Marker</h2>
         <p>Use the Find My Location  tool to place  a marker on the map based on your location.</p>
          <div style= "width: 500px; margin: 0 auto;">
@@ -94,6 +105,7 @@
             <span style="color: red; font-size: 80px;line-height: 20px;vertical-align: middle"> &#10145 </span> 
             <img src="data/marker.png" style="height: 200px;vertical-align: middle">
         </div>  
+        <!-- Section: Distance Measurement -->
         <h2>Distance Measurement</h2>
         <p style="margin-bottom: 5px">1.Click on the map to create the first point.</p>
         <img src="data/firstclick.png" style="height: 200px;padding-bottom: 10px">
@@ -103,6 +115,7 @@
         <img src="data/totaldistance.png" style="height: 60px; padding-bottom: 10px">
         <p>4. To clear the points and the measurement, click the Clear button at the top of the screen.</p>
         <img src="data/clear.png" style="height: 40px">
+        <!-- Section: Directions -->
         <h2>Directions</h2>
         <p>Input your current address in the "A" box in the top right of the map, and the destination address in the "B" box underneath it. As you input each address, the map will pan to its' location.</p>
         <img src="data/addressbox.png" style="height: 100px;border-style: solid; border-width: 2px; border-color: black;">
