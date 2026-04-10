@@ -1,5 +1,6 @@
-# GGR472 Final Project
-This repository contains codes and data used to create our website, 
+# GGR472 Final Project: CycleTO (Toronto Cycling Route Planner)
+Our website contains an interactive web map designed to help users explore Toronto's cycling networks, the map provides navigation guidance as well as the location of essential amenities along the way. Our project aims to make cycling in Toronto more convinient and accesible.
+
 
 ## Repository content
 - Data from geojson.io/Bicycle Parkng Racks Data - 4326.geojson: Data file containing point location of bicycle parking racks in the city of Toronto
@@ -31,3 +32,15 @@ This repository contains codes and data used to create our website,
 - data/addressbox.png: Image of the origin and destination address input boxes used in navigation.html instructions
 - data/transportmethod.png: Image of the transportation method selector used in navigation.html instructions
 - data/directions.png: Image of the step-by-step directions panel used in navigation.html instructions
+
+## Features
+- Interactive web map build with Mapbox GL JS
+- Pop up display on click
+- Zoom and pan functionality
+- Return to full extent button
+- Full screen mode
+- Layer toggle to filter map features
+- Toggle to show legend
+- Live User location
+- Distance calculation between points
+- Navigation container
