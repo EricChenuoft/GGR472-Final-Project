@@ -13,7 +13,7 @@ img {
 h1 {
     text-shadow: 2px 2px;
 }
-
+/* style for the background image on index.html */
 .main-bg {
     background-image: url('data/bike.gif');
     background-repeat: no-repeat;
@@ -28,6 +28,7 @@ h1 {
     margin-top: 0;
 }
 
+/* style for the background image on amenities.html */
 .am-bg {
     background-image: url('data/bikerack.webp');
     background-repeat: no-repeat;
@@ -42,6 +43,7 @@ h1 {
     margin-top: 0;
 }
 
+/* Background colour for the title section in index.html */
 .title {
     background-color: #12ad52;
     display: inline-block;
@@ -49,6 +51,7 @@ h1 {
     border-radius: 10px;
 }
 
+/* styling for the map button on index.html */
 .mapbutton {
     background-color: rgb(26, 255, 0);
     border: none;
@@ -126,6 +129,7 @@ body.navigation-page {
     margin-right: 5px;
 }
 
+/* stlying for the web map */
 .map {
     position: absolute;
     top: 0;
@@ -133,13 +137,14 @@ body.navigation-page {
     width: 100%;
 }
 
-
+/* styling for the return to extend button in web map */
 #returnbutton {
     position: absolute;
     margin: 125px 20px 20px;
     width: 15%;
 }
 
+/* styling for the filter options box in web map */
 .map-data-container {
     position: relative;
     background: rgba(255, 255, 255, 0.8);
@@ -152,6 +157,7 @@ body.navigation-page {
     overflow: visible;
 }
 
+/* styling for the options label in web map */
 .option-label {
     font: 15px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -167,6 +173,7 @@ form {
     padding-bottom: 20px;
 }
 
+/* styling for the legend in web map */
 .legend {
     position: absolute;
     display: none;
@@ -195,6 +202,7 @@ form {
     background-color: var(--legendcolour);
 }
 
+/* styling for the navigation tool */
 #menu {
     background: #fff;
     position: absolute;
@@ -237,6 +245,7 @@ form {
     background: #3074a4;
 }
 
+/* styling for the distance calculation tool */
 .distance-container {
     position: absolute;
     top: 15px;
@@ -255,6 +264,7 @@ form {
     border-radius: 3px;
 }
 
+/* styling for the button that clears distance calculation */
 .clear-button {
     position:absolute; 
     top:10px; 
